@@ -1,0 +1,169 @@
+@font-face {
+  font-family: "Guanwu Brush";
+  src: url('/fonts/GuanwuBrush.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --brush-font: "Guanwu Brush", KaiTi, STKaiti, cursive;
+  font-family: var(--brush-font);
+  --gold: #e3bb6d;
+  --muted: #a7b6a9;
+  --line: rgba(197, 172, 112, .19);
+  background: #090e0d;
+}
+body { background: #090e0d; }
+.brand-name, .brand-en, .catalog-number, h1, .english-title, .object-caption,
+.object-caption small, .footer-caption, .footer-caption small, .stat-number,
+.stat-label small, .info-dialog h2, button, small {
+  font-family: var(--brush-font);
+  font-weight: 400;
+}
+#app {
+  background: radial-gradient(ellipse at 76% 44%, #1d665a20, transparent 48%),
+    radial-gradient(ellipse at 35% 3%, #b7772020, transparent 55%);
+}
+.brand-name, h1, .english-title, .site-header nav a, .site-header nav button,
+.intro-copy, .stat-number, .footer-caption > span:last-child, .object-caption > span:last-child,
+.info-dialog h2, .footer-link, #replay-label {
+  background: linear-gradient(115deg, #faf0d2 5%, #dfa750 34%, #f4d78d 49%, #82d3c2 78%, #efd39b 97%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+h1 {
+  width: fit-content;
+  max-width: 100%;
+  font-family: var(--brush-font);
+  font-size: clamp(50px, 4.7vw, 82px);
+  line-height: 1.28;
+  letter-spacing: 2px;
+  background-size: 100% 100%;
+  filter: drop-shadow(0 0 22px #d6974014);
+  margin-bottom: 27px;
+}
+.brand-name { font-size: 35px; }
+.brand-en { font-size: 11px; letter-spacing: 1.8px; }
+.site-header nav, .site-header nav button { font-size: 16px; letter-spacing: 2px; }
+.header-note { font-size: 13px; }
+.eyebrow, .catalog-number { font-size: 14px; letter-spacing: 1.5px; }
+.english-title { font-size: 17px; letter-spacing: 3px; line-height: 1.7; }
+.intro-copy { font-size: 16px; line-height: 2; letter-spacing: .8px; }
+.primary-action { font-size: 17px; letter-spacing: 1px; width: 224px; }
+.primary-action svg, .footer-link svg, .footer-marker, .mode svg {
+  fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round;
+}
+.action-icon { width: 23px; height: 23px; stroke-width: 1.1; flex-shrink: 0; }
+.action-arrow { width: 21px; height: 21px; stroke-width: 1.3; margin-left: auto; }
+.small-label { font-size: 13px; }
+.small-label > span { font-size: 11px; }
+.mode { font-size: 15px; padding: 9px 14px; }
+.mode svg { width: 16px; height: 16px; flex-shrink: 0; stroke-width: 1.2; }
+.mode .dot-grid { stroke-width: 3; }
+.intro-footnote { font-size: 13px; }
+.stage-heading { font-size: 11px; letter-spacing: 2px; }
+.formation-status { font-size: 13px; }
+.object-caption { font-size: 20px; }
+.object-caption small { font-size: 10px; letter-spacing: 1.6px; }
+.stage-hint { font-size: 12px; }
+.hint-divider { padding: 0 9px; }
+.footer-caption { font-size: 17px; }
+.footer-caption small, .stat-label small { font-size: 10px; letter-spacing: 1.6px; }
+.stat-number { font-size: 36px; }
+.stat-label, .footer-link { font-size: 15px; }
+.footer-link svg { width: 24px; height: 24px; stroke-width: 1.3; }
+.footer-marker { width: 36px; height: 36px; flex-shrink: 0; stroke-width: .9; }
+.loading { font-size: 17px; }
+.dialog-close { font-size: 20px; }
+.info-dialog h2 { font-size: 36px; }
+.info-dialog p, .info-dialog dl div { font-size: 16px; }
+.dialog-note { font-size: 14px!important; }
+.guide-list { list-style: none; counter-reset: guide; padding-left: 30px; }
+.guide-list li { position: relative; counter-increment: guide; font-size: 20px; }
+.guide-list li::before { content: counter(guide, cjk-ideographic); position: absolute; left: -30px; top: 12px; color: var(--gold); }
+.guide-list span { font-size: 16px; }
+.intro-copy { background-image: linear-gradient(110deg, #d1c7a8, #90b8aa); }
+.site-header { border-image: linear-gradient(90deg, #946e2638, #d4b97964, #5faf9b40) 1; }
+.site-header nav button:hover, .site-header nav a:hover { filter: brightness(1.4); }
+.primary-action {
+  border-color: #d8b56788;
+  background: linear-gradient(115deg, #b7812920, #49ac9620);
+  box-shadow: 0 0 23px #bb863315, inset 0 0 22px #d99f3610;
+}
+.primary-action:hover { box-shadow: 0 0 25px #d0a34c26, inset 0 0 22px #78cdb822; background: #7cba9a14; }
+.mode.active { color: #f5dfb2; background: linear-gradient(120deg, #9c712943, #4eac9340); }
+.celestial-sign {
+  position: absolute; right: 35px; top: 140px; width: 47px; height: 83px;
+  border: 1px solid #cbaa654f; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 6px; transform: rotate(-5deg); color: #dbb96a;
+  box-shadow: inset 0 0 15px #b0792015; user-select: none;
+}
+.celestial-sign span { font-size: 36px; }
+.celestial-sign small { font-size: 9px; letter-spacing: .3px; }
+.constellation-map {
+  position: absolute; left: 50%; top: 48%; width: 99%; height: 96%; object-fit: contain;
+  transform: translate(-50%, -50%); opacity: calc(.65 + var(--gather-energy, 0) * .25);
+  pointer-events: none;
+}
+.celestial-runes {
+  position: absolute; right: 29px; top: 25%; height: 41%; display: flex;
+  flex-direction: column; justify-content: space-between; pointer-events: none;
+  font-family: var(--brush-font); font-size: 15px; color: #a8c5ac77; letter-spacing: 8px;
+  writing-mode: vertical-rl;
+}
+.stage { background: radial-gradient(ellipse at 50% 48%, #5fb49312, transparent 64%); }
+.stage:before { background: radial-gradient(ellipse, #e6a74a22, #3cd7bb14 42%, transparent 68%); }
+.corner { border-color: #d1b57265; width: 22px; height: 22px; }
+.formation-status { color: #e2c888; }
+.formation-track i { background: linear-gradient(90deg, #e9b350, #70c9b4); box-shadow: 0 0 12px #c7ab7d; }
+.stage-tools button { border-color: #b79e5340; background: linear-gradient(120deg, #57442220, #234b3e40); }
+.footer-marker { color: #d5b166; filter: drop-shadow(0 0 9px #d5b16633); }
+.gallery-footer { border-image: linear-gradient(90deg, #936e2655, #dabd8566, #5ca68c55) 1; }
+.info-dialog { background: radial-gradient(ellipse at top right, #255d482c, transparent 60%), #111811; }
+@media (max-width: 1100px) {
+  h1 { font-size: 52px; }
+  .celestial-sign { right: 25px; top: 151px; width: 36px; height: 67px; }
+  .celestial-sign span { font-size: 27px; }
+  .celestial-sign small { font-size: 8px; }
+  .site-header nav, .site-header nav button { font-size: 14px; }
+  .intro-copy { font-size: 14px; }
+  .footer-caption { font-size: 14px; }
+  .footer-caption small, .stat-label small { font-size: 8px; }
+  .stat-label { font-size: 13px; }
+}
+@media (max-width: 760px) {
+  .brand-name { font-size: 30px; }
+  .site-header nav, .site-header nav button { font-size: 12px; letter-spacing: .5px; }
+  h1 { font-size: 51px; line-height: 1.25; margin-bottom: 19px; }
+  .eyebrow, .catalog-number { font-size: 12px; }
+  .english-title { font-size: 11px; letter-spacing: .9px; top: 106px; }
+  .intro-copy { font-size: 13px; letter-spacing: .3px; line-height: 1.9; }
+  .primary-action { font-size: 13px; width: 166px; gap: 7px; }
+  .action-icon { width: 19px; height: 19px; }
+  .action-arrow { width: 17px; height: 17px; }
+  .small-label { font-size: 11px; }
+  .mode { font-size: 12px; padding: 8px 8px; gap: 5px; }
+  .mode svg { width: 13px; height: 13px; }
+  .stage-heading { font-size: 9px; letter-spacing: 1.4px; }
+  .formation-status { font-size: 11px; }
+  .object-caption { font-size: 16px; }
+  .object-caption small { font-size: 8px; letter-spacing: .5px; }
+  .stage-hint { font-size: 10px; }
+  .footer-caption { font-size: 15px; }
+  .footer-marker { width: 28px; height: 28px; }
+  .footer-caption small { font-size: 9px; }
+  .stat-number { font-size: 32px; }
+  .stat-label { font-size: 12px; }
+  .stat-label small { font-size: 8px; }
+  .footer-link { font-size: 14px; }
+  .celestial-sign { top: 34px; right: 3px; width: 33px; height: 53px; }
+  .celestial-sign span { font-size: 27px; }
+  .celestial-sign small { font-size: 7px; letter-spacing: 0; }
+  .constellation-map { width: 128%; height: 95%; opacity: .75; }
+  .celestial-runes { right: 14px; font-size: 12px; letter-spacing: 5px; }
+  .corner { width: 15px; height: 15px; }
+  .info-dialog h2 { font-size: 30px; }
+  .info-dialog p, .info-dialog dl div, .guide-list span { font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { h1 { animation: none; } }

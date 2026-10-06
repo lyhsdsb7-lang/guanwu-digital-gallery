@@ -1,0 +1,12 @@
+node_modules/
+dist/
+output/
+.playwright-cli/
+*.log
+*.crdownload
+offline/
+scripts/package-offline.py
+{67230c8c-cf19-4c0d-a62f-9a7531b9b116}
+src/dragon-theme.css
+public/dragon.svg
+public/fonts/ZhiMangXing-OFL.txt

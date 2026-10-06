@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101310" />
+    <meta name="description" content="在万千微光中探索一件数字赏石 可旋转聚合散开的交互点云展厅" />
+    <link rel="preload" href="/fonts/GuanwuBrush.woff" as="font" type="font/woff" crossorigin />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23101310'/%3E%3Cpath d='M16 43V21h32v22M11 48h42M22 21v22m10-22v22m10-22v22M12 17l20-9 20 9' fill='none' stroke='%23c0a276' stroke-width='3'/%3E%3C/svg%3E" />
+    <title>观物 数字赏石展厅</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="site-header">
+        <a class="brand" href="#" aria-label="观物数字展厅首页">
+          <svg viewBox="0 0 38 38" aria-hidden="true"><path d="M6 29V12h26v17M3 33h32M11 12v17m8-17v17m8-17v17M4 8l15-5 15 5"/></svg>
+          <span class="brand-name">观物</span><span class="brand-en">GUANWU<br>DIGITAL COLLECTION</span>
+        </a>
+        <nav aria-label="主导航">
+          <a class="nav-active" href="#gallery" aria-current="page">数字展厅</a>
+          <button data-dialog="archive">藏品档案</button>
+          <button data-dialog="guide">观赏指南</button>
+        </nav>
+        <span class="header-note"><i></i> 一座触手可及的展厅</span>
+      </header>
+
+      <main id="gallery" class="gallery">
+        <section class="introduction" aria-labelledby="main-title">
+          <div class="eyebrow"><span class="catalog-number">藏品 001</span><span class="hairline"></span>数字赏石 交互展厅</div>
+          <div class="celestial-sign" aria-hidden="true"><span>辰</span><small>星河入微</small></div>
+          <h1 id="main-title">凝光成形<br>观物入微</h1>
+          <p class="english-title">STELLAR LIGHT<br>ETERNAL FORM</p>
+          <p class="intro-copy">让目光穿过表面 让细节缓缓浮现<br>在万千微光之间 重新发现一件赏石</p>
+          <button id="replay" class="primary-action" disabled><svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 2.5 7.1L22 12l-7.5 2.1L12 22l-2.6-7.5L2 12l7.1-2.8Z"/></svg><span id="replay-label">正在唤醒藏品</span><svg class="action-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 20 14-15M9 5l10-.3-.2 10"/></svg></button>
+          <div class="mode-section">
+            <span class="small-label">观看方式 <span>VIEW MODE</span></span>
+            <div class="mode-switch" role="group" aria-label="观看方式">
+              <button class="mode active" data-mode="points" aria-pressed="true" disabled><svg class="dot-grid" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 4h.1M10 3h.1M15 5h.1M4 10h.1M10 10h.1M16 10h.1M5 15h.1M10 17h.1M15 15h.1"/></svg>点云之形</button>
+              <button class="mode" data-mode="solid" aria-pressed="false" disabled><svg class="solid-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="m10 2.5 7 7.7-7.3 7.2L3 10Z"/></svg>模型原貌</button>
+            </div>
+          </div>
+          <div class="intro-footnote"><span class="footnote-line"></span><span>由形入境 见微知美</span></div>
+        </section>
+
+        <section id="stage" class="stage" aria-label="可交互的三维赏石 拖动旋转 滚轮缩放">
+          <div class="stage-frame" aria-hidden="true"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span></div>
+          <div class="stage-heading"><span>THE DIGITAL OBJECT</span><span>001</span></div>
+          <div class="formation-status"><span id="formation-phase">等待微光</span><div class="formation-track"><i id="formation-progress"></i></div></div>
+          <img class="constellation-map" src="/constellation.svg" alt="" aria-hidden="true" />
+          <div class="celestial-runes" aria-hidden="true"><span>星辰</span><span>流光</span><span>成象</span></div>
+          <div id="canvas-mount"></div>
+          <div id="loading" class="loading" role="status" aria-live="polite"><span class="loading-orbit"></span><span id="loading-label">载入数字赏石</span><span id="loading-percent">已载入 0</span><div class="loading-track"><i id="loading-bar"></i></div></div>
+          <div id="error" class="error-message" role="alert" hidden><p id="error-text"></p><button id="retry">重新载入</button></div>
+          <div class="object-caption"><span class="caption-line"></span><span>赏石 数字形态<small>ORNAMENTAL STONE DIGITAL STUDY</small></span></div>
+          <div class="stage-hint"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2" width="10" height="17" rx="5"/><path d="M12 5v4M3 12l-2 2 2 2m18-4 2 2-2 2"/></svg><span>拖动旋转<span class="hint-divider" aria-hidden="true"></span><span class="desktop-gesture">滚轮缩放</span><span class="mobile-gesture">双指缩放</span></span></div>
+          <div class="stage-tools" role="group" aria-label="展品交互控制">
+            <button id="rotate" aria-label="暂停自动旋转" aria-pressed="true" title="暂停自动旋转" disabled><svg viewBox="0 0 24 24"><path d="M8 6v12M16 6v12"/></svg></button>
+            <button id="scatter" aria-label="散开粒子" aria-pressed="false" title="散开粒子" disabled><svg viewBox="0 0 24 24"><path d="M9 9 4 4m11 5 5-5M9 15l-5 5m11-5 5 5M4 8V4h4m8 0h4v4M4 16v4h4m8 0h4v-4"/></svg></button>
+            <button id="reset" aria-label="重置视角" title="重置视角" disabled><svg viewBox="0 0 24 24"><path d="M5 8a8 8 0 1 1-1 8M5 3v5h5"/></svg></button>
+          </div>
+        </section>
+      </main>
+
+      <footer class="gallery-footer">
+        <div class="footer-caption"><svg class="footer-marker" viewBox="0 0 40 40" aria-hidden="true"><path d="m20 2 1.7 15L38 20l-16 1.8L20 38l-2.2-16L2 20l15.8-2.2Zm-12 6 7 7m10 10 7 7M32 8l-7 7M15 25l-7 7"/></svg><span>将一瞬凝视 留给细节<small>A MOMENT TO LOOK CLOSER</small></span></div>
+        <div class="footer-stat"><span class="stat-number">360</span><span class="stat-label">自由观赏<small>EVERY PERSPECTIVE</small></span></div>
+        <div class="footer-stat"><span class="stat-number" id="point-count">待显</span><span class="stat-label">微光成形<small>POINTS OF LIGHT</small></span></div>
+        <button class="footer-link" data-dialog="archive">探索藏品<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 20 14-15M9 5l10-.3-.2 10"/></svg></button>
+      </footer>
+      <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+    </div>
+
+    <dialog id="archive" class="info-dialog" aria-labelledby="archive-title">
+      <button class="dialog-close" aria-label="关闭藏品档案">收起</button><span class="eyebrow">OBJECT ARCHIVE 001</span>
+      <h2 id="archive-title">赏石档案</h2><p>此展厅使用你提供的三维模型<br>展示其数字形态与表面细节</p>
+      <dl><div><dt>展示对象</dt><dd>数字赏石</dd></div><div><dt>素材格式</dt><dd>GLB 含表面贴图</dd></div><div><dt>观赏方式</dt><dd>点云之形 模型原貌</dd></div><div><dt>文物名称年代与出处</dt><dd>待补充资料</dd></div></dl>
+      <p class="dialog-note">数字模型用于视觉展示<br>具体文物信息以你后续提供的资料为准</p>
+    </dialog>
+    <dialog id="guide" class="info-dialog" aria-labelledby="guide-title">
+      <button class="dialog-close" aria-label="关闭观赏指南">收起</button><span class="eyebrow">A GUIDE TO EXPLORING</span><h2 id="guide-title">慢一点 看见更多</h2>
+      <ol class="guide-list"><li><b>转动目光</b><span>拖动赏石查看不同角度<br>滚轮或双指缩放</span></li><li><b>切换形态</b><span>在点云之形和模型原貌之间切换</span></li><li><b>唤醒微光</b><span>点击重演光粒成形<br>观看光粒散开 旋流汇聚 细节浮现<br>右下角也可单独散开和聚合</span></li><li><b>留住一瞬</b><span>暂停自动旋转 仔细观察<br>重置按钮让视角回到起点</span></li></ol>
+    </dialog>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
