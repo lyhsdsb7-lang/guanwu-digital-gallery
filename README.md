@@ -44,6 +44,12 @@ npm.cmd run preview
 
 发布时 Vite 自动使用 Pages 的子路径，本地开发仍使用根路径。模型、星图和毛笔字体随网站一起部署，不依赖本机服务器。
 
+展示版本使用 `public/models/artifact-fast.glb`，大小约 1 MB。模型网格数据与原始 GLB 完全相同，三张贴图缩至 1024 像素并压缩为 JPEG。原始 33 MB 文件仍保留为素材，不会在打开网页时下载。
+
+页面在 HTML 到达时先显示轻量光粒开场，同时预加载展示模型。三维场景就绪后平滑交接到原有粒子动画。手机的三维画布像素比上限为 1.35，以降低绘制负担。
+
+重新生成展示模型需要 Python 和 Pillow：`python scripts/optimize-model.py`。
+
 本地验证发布路径：
 
 ```powershell

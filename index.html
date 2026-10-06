@@ -6,6 +6,7 @@
     <meta name="theme-color" content="#101310" />
     <meta name="description" content="在万千微光中探索一件数字赏石 可旋转聚合散开的交互点云展厅" />
     <link rel="preload" href="/fonts/GuanwuBrush.woff" as="font" type="font/woff" crossorigin />
+    <link rel="preload" href="/models/artifact-fast.glb" as="fetch" crossorigin />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23101310'/%3E%3Cpath d='M16 43V21h32v22M11 48h42M22 21v22m10-22v22m10-22v22M12 17l20-9 20 9' fill='none' stroke='%23c0a276' stroke-width='3'/%3E%3C/svg%3E" />
     <title>观物 数字赏石展厅</title>
   </head>
@@ -49,6 +50,7 @@
           <img class="constellation-map" src="/constellation.svg" alt="" aria-hidden="true" />
           <div class="celestial-runes" aria-hidden="true"><span>星辰</span><span>流光</span><span>成象</span></div>
           <div id="canvas-mount"></div>
+          <canvas id="arrival-particles" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"></canvas>
           <div id="loading" class="loading" role="status" aria-live="polite"><span class="loading-orbit"></span><span id="loading-label">载入数字赏石</span><span id="loading-percent">已载入 0</span><div class="loading-track"><i id="loading-bar"></i></div></div>
           <div id="error" class="error-message" role="alert" hidden><p id="error-text"></p><button id="retry">重新载入</button></div>
           <div class="object-caption"><span class="caption-line"></span><span>赏石 数字形态<small>ORNAMENTAL STONE DIGITAL STUDY</small></span></div>
@@ -80,6 +82,47 @@
       <button class="dialog-close" aria-label="关闭观赏指南">收起</button><span class="eyebrow">A GUIDE TO EXPLORING</span><h2 id="guide-title">慢一点 看见更多</h2>
       <ol class="guide-list"><li><b>转动目光</b><span>拖动赏石查看不同角度<br>滚轮或双指缩放</span></li><li><b>切换形态</b><span>在点云之形和模型原貌之间切换</span></li><li><b>唤醒微光</b><span>点击重演光粒成形<br>观看光粒散开 旋流汇聚 细节浮现<br>右下角也可单独散开和聚合</span></li><li><b>留住一瞬</b><span>暂停自动旋转 仔细观察<br>重置按钮让视角回到起点</span></li></ol>
     </dialog>
+    <script>
+      // A tiny immediate opening runs while the 3D module and model download.
+      (() => {
+        const canvas = document.getElementById('arrival-particles');
+        const stage = document.getElementById('stage');
+        const context = canvas.getContext('2d');
+        if (!context) return;
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const particles = Array.from({ length: 220 }, (_, i) => ({
+          x: Math.sin(i * 127.1) * 0.46,
+          y: Math.cos(i * 311.7) * 0.32,
+          size: 0.7 + (i % 9) * 0.3,
+          kind: i % 6,
+        }));
+        let started = performance.now();
+        function draw(now) {
+          if (canvas.dataset.complete) { canvas.remove(); return; }
+          const w = stage.clientWidth, h = stage.clientHeight;
+          if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+          context.clearRect(0, 0, w, h);
+          const time = reduced ? 0 : (now - started) / 1000;
+          for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            const x = w * (0.5 + p.x) + Math.sin(time * 0.7 + i) * 13;
+            const y = h * (0.5 + p.y) + Math.sin(p.x * 8 + time + i * 0.1) * h * 0.05;
+            const s = p.size;
+            context.strokeStyle = context.fillStyle = i % 3 ? '#d7af63' : '#87c6b5';
+            context.globalAlpha = 0.3 + (Math.sin(time + i * 1.7) + 1) * 0.22;
+            context.beginPath();
+            if (p.kind === 0) { context.arc(x, y, s, 0, Math.PI * 2); context.fill(); }
+            else if (p.kind === 1) { context.moveTo(x, y - s * 2); context.lineTo(x + s, y); context.lineTo(x, y + s * 2); context.lineTo(x - s, y); context.closePath(); context.fill(); }
+            else if (p.kind === 2) { context.moveTo(x - s * 2, y); context.lineTo(x + s * 2, y); context.moveTo(x, y - s * 2); context.lineTo(x, y + s * 2); context.stroke(); }
+            else if (p.kind === 3) { context.arc(x, y, s * 1.8, 0.2, 2.8); context.stroke(); }
+            else if (p.kind === 4) { context.moveTo(x, y); context.lineTo(x + s, y - s * 3); context.stroke(); }
+            else { context.arc(x, y, s * 1.6, 0, Math.PI * 2); context.stroke(); }
+          }
+          requestAnimationFrame(draw);
+        }
+        requestAnimationFrame(draw);
+      })();
+    </script>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

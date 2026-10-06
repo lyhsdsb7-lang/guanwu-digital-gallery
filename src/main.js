@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { MeshSurfaceSampler } from 'three/addons/math/MeshSurfaceSampler.js';
-import modelUrl from '../8c83d2ade1bc2ae3f25bac1d94cfdd33.glb?url';
+const modelUrl = `${import.meta.env.BASE_URL}models/artifact-fast.glb`;
 import './style.css';
 import './celestial-theme.css';
 
@@ -35,7 +35,7 @@ function showError(error) {
 
 function initializeRenderer() {
   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
+  renderer.setPixelRatio(Math.min(devicePixelRatio, stage.clientWidth < 450 ? 1.35 : 1.75));
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -419,6 +419,12 @@ async function loadArtifact() {
   normalizedModel.visible = false;
   artifact.rotation.y = -0.14;
   state.ready = true;
+  const arrival = $('arrival-particles');
+  if (arrival) {
+    arrival.style.transition = 'opacity 300ms';
+    arrival.style.opacity = '0';
+    setTimeout(() => { arrival.dataset.complete = 'true'; }, 300);
+  }
   state.progress = reducedMotion.matches ? 1 : 0;
   state.start = performance.now();
   startSequence('intro');
