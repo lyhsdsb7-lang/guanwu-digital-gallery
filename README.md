@@ -34,25 +34,11 @@ npm.cmd run preview
 
 构建产物位于 `dist`，模型自动复制到构建资产中。所有运行依赖均从本地加载。
 
-## 离线分享
-
-离线包位于 `output/观物离线展厅.zip`，接收者使用 Windows 10 或 11。
-完整解压后双击「启动展厅.cmd」，浏览器自动打开 `http://127.0.0.1:4173/`。
-PPT 中的超链接继续使用这个地址。演示结束后双击「关闭展厅.cmd」。
-无需安装 Node.js、Python 或额外服务，所有模型和字体均在包内。
-压缩包不包含 PPT 文件，需要另外分享你的 PPT。
-
-重新打包：
-
-```powershell
-npm.cmd run build
-python scripts/package-offline.py
-```
-
-启动器源码位于 `offline`，服务仅监听本机回环地址。
-端口被其他程序占用时会提示并停止，不会改用其他地址。
-
 ## GitHub Pages 发布
+
+在线地址：https://lyhsdsb7-lang.github.io/guanwu-digital-gallery/
+
+使用这个在线地址生成二维码或作为 WPS PPT 的超链接，访问者无需启动本地服务器。
 
 仓库配置了 `.github/workflows/deploy.yml`。GitHub 仓库的 Settings → Pages 中选择 GitHub Actions 后，推送到 `main` 会自动安装依赖、构建并发布网站。
 
